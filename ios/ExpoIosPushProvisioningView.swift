@@ -1,15 +1,17 @@
 import UIKit
 import PassKit
 import SwiftUI
+import ExpoModulesCore
 
 class ExpoIosPushProvisioningViewController: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupApplePayButton()
     }
 
     private func setupApplePayButton() {
-        let passKitButton = PKAddPassButton(addPassButtonStyle: .blackOutline)
+        let passKitButton = PKAddPassButton(addPassButtonStyle: .black)
         passKitButton.addTarget(self, action: #selector(onEnroll), for: .touchUpInside)
         view.addSubview(passKitButton)
         passKitButton.translatesAutoresizingMaskIntoConstraints = false
@@ -70,11 +72,13 @@ class ExpoIosPushProvisioningViewController: UIViewController {
     }
     
     @objc private func onEnroll(button: UIButton) {
-      //    También puedes evitar mostrar el botón para que el usuario no lo presione.
-      guard isPassKitAvailable() else {
-        showPassKitUnavailable(message: "Apple Pay no está disponible para tu dispositivo")
-        return
-      }
+        guard isPassKitAvailable() else {
+            showPassKitUnavailable(message: "Apple Pay no está disponible para tu dispositivo")
+            return
+        }
+        
+        // Initialize the enroll process
+        initEnrollProcess()
     }
 }
 
@@ -137,3 +141,22 @@ extension ExpoIosPushProvisioningViewController: PKAddPaymentPassViewControllerD
       }
     }
     }
+
+// Create a UIView subclass that will host our view controller
+class ExpoIosPushProvisioningView: ExpoView {
+    private var viewController: ExpoIosPushProvisioningViewController?
+    
+    required init(appContext: AppContext? = nil) {
+        super.init(appContext: appContext)
+        setupViewController()
+    }
+    
+    private func setupViewController() {
+        viewController = ExpoIosPushProvisioningViewController()
+        if let viewController = viewController {
+            viewController.view.frame = bounds
+            addSubview(viewController.view)
+            viewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        }
+    }
+}

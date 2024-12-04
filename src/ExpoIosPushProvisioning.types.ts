@@ -10,4 +10,6 @@ export type ChangeEventPayload = {
   value: string;
 };
 
-export type ExpoIosPushProvisioningViewProps = {};
+export type ExpoIosPushProvisioningViewProps = {
+  onEnrollPress?: () => void;
+};

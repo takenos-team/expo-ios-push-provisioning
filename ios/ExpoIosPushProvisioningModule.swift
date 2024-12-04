@@ -5,7 +5,6 @@ public class ExpoIosPushProvisioningModule: Module {
         Name("ExpoIosPushProvisioning")
 
         View(ExpoIosPushProvisioningView.self) {
-            // Add any props here if needed
         }
     }
 }
