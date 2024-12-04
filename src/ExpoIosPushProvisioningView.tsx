@@ -6,6 +6,8 @@ import { ExpoIosPushProvisioningViewProps } from './ExpoIosPushProvisioning.type
 const NativeView: React.ComponentType<ExpoIosPushProvisioningViewProps> =
   requireNativeView('ExpoIosPushProvisioning');
 
-export default function ExpoIosPushProvisioningView(props: ExpoIosPushProvisioningViewProps) {
+export default function ExpoIosPushProvisioningView(
+  props: ExpoIosPushProvisioningViewProps
+) {
   return <NativeView {...props} />;
 }
