@@ -5,6 +5,9 @@ public class ExpoIosPushProvisioningModule: Module {
         Name("ExpoIosPushProvisioning")
 
         View(ExpoIosPushProvisioningView.self) {
+            Prop("cardInformation") { (view, cardInformation: CardInformation) in
+                view.cardInformation = cardInformation
+            }
         }
     }
 }

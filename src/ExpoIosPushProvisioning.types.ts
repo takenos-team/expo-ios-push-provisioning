@@ -1,3 +1,5 @@
+import { ViewStyle } from "react-native";
+
 export type OnLoadEventPayload = {
   url: string;
 };
@@ -10,6 +12,12 @@ export type ChangeEventPayload = {
   value: string;
 };
 
+export type CardInformation = {
+  panTokenSuffix: string;
+  holder: string;
+};
+
 export type ExpoIosPushProvisioningViewProps = {
-  onEnrollPress?: () => void;
+  cardInformation: CardInformation;
+  style?: ViewStyle;
 };
